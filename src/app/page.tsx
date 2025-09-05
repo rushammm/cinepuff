@@ -1,103 +1,120 @@
-import Image from "next/image";
+
+'use client';
+
+
+import React, { useRef, useEffect } from "react";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+
+const genres = ["Action", "Comedy", "Drama", "Romance", "Sci-Fi", "Horror", "Animation"];
+const timelines = ["1980s", "1990s", "2000s", "2010s", "2020s"];
+const types = ["Bollywood", "Hollywood", "Lollywood"];
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const hoverAudioRef = useRef<HTMLAudioElement>(null);
+  const clickAudioRef = useRef<HTMLAudioElement>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const playHoverSound = () => {
+    const audio = hoverAudioRef.current;
+    if (audio) {
+      audio.currentTime = 0;
+      audio.play();
+    }
+  };
+
+  // Play click sound on every click in the document
+  useEffect(() => {
+    const playClickSound = () => {
+      const audio = clickAudioRef.current;
+      if (audio) {
+        audio.currentTime = 0;
+        audio.play();
+      }
+    };
+    document.addEventListener('click', playClickSound);
+    return () => {
+      document.removeEventListener('click', playClickSound);
+    };
+  }, []);
+  return (
+    <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#FDE2F3] via-[#E5D4F5] via-40% to-[#FFF6CC] px-4 py-12 font-pixel relative overflow-x-hidden">
+      <audio ref={hoverAudioRef} src="/ui-sounds-pack-4-2-359741.mp3" preload="auto" />
+      <audio ref={clickAudioRef} src="/computer-mouse-click-352734.mp3" preload="auto" />
+      <div className="flex flex-col items-center w-full max-w-xl p-8 rounded-3xl shadow-xl border-4 border-[#FFCCE5] bg-white/60 backdrop-blur-md z-10">
+        {/* App Title */}
+
+        <h1
+          className="text-4xl sm:text-5xl font-bold uppercase mb-8 bg-gradient-to-r from-[#F7A9C4] via-[#E5D4F5] to-[#D8B4E2] text-transparent bg-clip-text drop-shadow-pixel"
+          style={{ letterSpacing: 2 }}
+        >
+          cinepuff
+        </h1>
+
+
+        {/* Input Fields */}
+        <form className="w-full flex flex-col gap-6">
+          {/* Genre Dropdown */}
+          <label className="flex flex-col gap-2 font-bold text-[#5A3E85] uppercase tracking-widest">
+            <Select>
+              <SelectTrigger className="pixel-select-trigger" onMouseEnter={playHoverSound}>
+                <SelectValue placeholder="Select Genre" />
+              </SelectTrigger>
+              <SelectContent className="pixel-select-content">
+                {genres.map((g) => (
+                  <SelectItem key={g} value={g} className="pixel-select-item">{g}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </label>
+
+          {/* Timeline Selector */}
+          <label className="flex flex-col gap-2 font-bold text-[#5A3E85] uppercase tracking-widest">
+            Timeline
+            <Select>
+              <SelectTrigger className="pixel-select-trigger" onMouseEnter={playHoverSound}>
+                <SelectValue placeholder="Select Timeline" />
+              </SelectTrigger>
+              <SelectContent className="pixel-select-content">
+                {timelines.map((t) => (
+                  <SelectItem key={t} value={t} className="pixel-select-item">{t}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </label>
+
+          {/* Type Dropdown */}
+          <label className="flex flex-col gap-2 font-bold text-[#5A3E85] uppercase tracking-widest">
+            Type
+            <Select>
+              <SelectTrigger className="pixel-select-trigger" onMouseEnter={playHoverSound}>
+                <SelectValue placeholder="Select Type" />
+              </SelectTrigger>
+              <SelectContent className="pixel-select-content">
+                {types.map((t) => (
+                  <SelectItem key={t} value={t} className="pixel-select-item">{t}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </label>
+
+          {/* Submit Button */}
+          <Button
+            type="submit"
+            className="pixel-btn mt-4 px-8 py-3"
+            onMouseEnter={playHoverSound}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            Get Recommendations
+          </Button>
+        </form>
+      </div>
+      {/* Cute pixel clouds background - bigger and spread throughout the screen */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none select-none opacity-60 z-0 flex flex-wrap items-end justify-between">
+        <span className="text-[8rem] md:text-[12rem] lg:text-[16rem] absolute left-0 top-0 cloud-float">☁️</span>
+        <span className="text-[7rem] md:text-[10rem] absolute right-0 top-10 cloud-drift-left">☁️</span>
+        <span className="text-[10rem] md:text-[14rem] absolute left-1/4 top-1/2 cloud-float">☁️</span>
+        <span className="text-[6rem] md:text-[9rem] absolute right-1/4 bottom-10 cloud-drift-right">☁️</span>
+        <span className="text-[12rem] md:text-[18rem] absolute left-1/2 bottom-0 cloud-float">☁️</span>
+      </div>
+    </main>
   );
 }
