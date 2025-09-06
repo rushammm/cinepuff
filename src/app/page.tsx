@@ -2,6 +2,8 @@
 'use client';
 
 
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 import React, { useRef, useEffect, useState } from "react";
 
 interface Movie {
@@ -11,8 +13,6 @@ interface Movie {
   release_date: string;
 }
 
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
 
 const genres = ["Action", "Comedy", "Drama", "Romance", "Sci-Fi", "Horror", "Animation"];
 const timelines = ["1980s", "1990s", "2000s", "2010s", "2020s"];
@@ -219,7 +219,6 @@ export default function Home() {
                       textShadow: '0 1px 0 #fff',
                     }}
                   >
-                    {/* {movie.overview?.substring(0, 80)}{movie.overview && movie.overview.length > 80 ? '...' : ''} */}
                   </div>
                 </div>
               ))}
@@ -237,4 +236,6 @@ export default function Home() {
       </div>
     </main>
   );
+
+}
 
