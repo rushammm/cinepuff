@@ -1,38 +1,70 @@
-/* Cloud floating and drifting animation */
-@keyframes cloudFloat {
-  0% { transform: translateY(0) scale(1) rotate(0deg); }
-  50% { transform: translateY(-30px) scale(1.05) rotate(2deg); }
-  100% { transform: translateY(0) scale(1) rotate(0deg); }
-}
-@keyframes cloudDriftLeft {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-40px); }
-}
-@keyframes cloudDriftRight {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(40px); }
-}
-.cloud-float {
-  animation: cloudFloat 6s ease-in-out infinite;
-}
-.cloud-drift-left {
-  animation: cloudDriftLeft 12s linear infinite alternate;
-}
-.cloud-drift-right {
-  animation: cloudDriftRight 14s linear infinite alternate;
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@700&display=swap');
+/* Pixel Font Hierarchy Utilities */
+.pixel-h1 {
+  font-family: 'Press Start 2P', cursive, monospace !important;
+  font-size: 2.5rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px;
+}
+.pixel-h2 {
+  font-family: 'Press Start 2P', cursive, monospace !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 1.5px;
+}
+.pixel-label {
+  font-family: 'Press Start 2P', cursive, monospace !important;
+  font-size: 0.85rem !important;
+  font-weight: 400 !important;
+  color: #A084CA !important; /* pastel purple */
+  letter-spacing: 1px;
+  margin-bottom: 0.25rem;
+  margin-top: 0.5rem;
+  text-transform: none !important;
+}
+.pixel-option {
+  font-family: 'Press Start 2P', cursive, monospace !important;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+}
+.pixel-btn {
+  font-family: 'Press Start 2P', cursive, monospace !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px;
+  border-radius: 999px !important; /* pill shape */
+  background: linear-gradient(90deg, #F7A9C4 0%, #E5D4F5 100%) !important;
+  color: #fff !important;
+  text-shadow: 0 0 8px #fff8, 0 0 16px #fff6;
+  box-shadow: 0 2px 12px 0 #F7A9C4aa, 0 4px 24px 0 #E5D4F588;
+  border: none !important;
+  transition: transform 0.15s cubic-bezier(.4,2,.6,1), box-shadow 0.15s, background 0.2s;
+}
+.pixel-btn:hover, .pixel-btn:focus-visible {
+  transform: scale(1.06);
+  box-shadow: 0 0 24px 8px #fff, 0 0 32px 16px #E5D4F5;
+  background: linear-gradient(90deg, #F7A9C4 10%, #D8B4E2 90%) !important;
+  outline: none;
+}
+/* Frosted Glass Card Effect */
+.frosted-card {
+  background: rgba(255, 255, 255, 0.80);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-radius: 1.5rem;
+  border: 2.5px solid #E5D4F5; /* pastel lavender border */
+}
 /* --- Custom shadcn/ui Select and Button pastel pixel theme --- */
 .pixel-input, .pixel-select-trigger, .pixel-select-content, .pixel-select-item {
   font-family: 'Press Start 2P', cursive, monospace !important;
-  background: #E5D4F5 !important;
-  border: 3px solid #FFCCE5 !important;
-  border-radius: 8px !important;
-  color: #5A3E85 !important;
+  background: linear-gradient(120deg, #E5D4F5 0%, #F7A9C4 100%) !important;
+  border: 2.5px solid #E5D4F5 !important;
+  border-radius: 10px !important;
+  color: #fff !important;
   font-size: 1rem !important;
-  box-shadow: 2px 2px 0 #F7A9C4 !important;
-  transition: box-shadow 0.2s, border-color 0.2s;
+  box-shadow: 0 0 0 3px #fff6 inset, 0 0 12px 2px #E5D4F5aa inset !important;
+  transition: box-shadow 0.2s, border-color 0.2s, background 0.2s, color 0.2s;
 }
 .pixel-select-trigger:focus, .pixel-select-trigger:hover,
 .pixel-input:focus, .pixel-input:hover {
@@ -40,22 +72,27 @@
   box-shadow: 0 0 8px #F7A9C4, 2px 2px 0 #F7A9C4 !important;
 }
 .pixel-select-content {
-  background: #FDE2F3 !important;
-  border: 3px solid #FFCCE5 !important;
-  box-shadow: 2px 2px 0 #F7A9C4 !important;
+  background: linear-gradient(120deg, #E5D4F5 0%, #F7A9C4 100%) !important;
+  border: 2.5px solid #E5D4F5 !important;
+  box-shadow: 0 0 0 3px #fff6 inset, 0 0 12px 2px #E5D4F5aa inset !important;
 }
 .pixel-select-item {
   font-family: 'Press Start 2P', cursive, monospace !important;
-  color: #5A3E85 !important;
-  background: #E5D4F5 !important;
-  border-radius: 6px !important;
-  padding: 0.5rem 1rem !important;
+  color: #fff !important;
+  background: linear-gradient(120deg, #E5D4F5 0%, #F7A9C4 100%) !important;
+  border-radius: 8px !important;
+  border: 2px solid #FFCCE5 !important;
+  padding: 0.5rem 1rem 0.5rem 1rem !important; /* py-2 */
+  margin: 0.5rem 0 !important; /* my-2 */
   font-size: 1rem !important;
-  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 0 0 2px #fff6 inset, 0 0 8px 1px #E5D4F5aa inset !important;
+  transition: background 0.2s, color 0.2s, border 0.2s;
 }
 .pixel-select-item[data-state="checked"], .pixel-select-item:focus, .pixel-select-item:hover {
-  background: #F7A9C4 !important;
-  color: #fff !important;
+  background: #fff !important;
+  color: #F7A9C4 !important;
+  border-color: #F7A9C4 !important;
+  background-image: none !important;
 }
 .pixel-btn {
   font-family: 'Press Start 2P', cursive, monospace !important;
